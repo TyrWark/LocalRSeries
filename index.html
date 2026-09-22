@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lightspeed Client - Redirecting...</title>
+</head>
+<body>
+  <p id="message">Finishing sign-in, you can close this tab once redirected...</p>
+  <p><a id="fallback-link" href="#">Click here if you are not redirected automatically</a></p>
+  <script>
+    // Lightspeed's OAuth server lands here with ?code=...&state=... (or
+    // ?error=...). Bounce straight to the Electron app's custom protocol so
+    // it can pick the callback up, preserving the full query string.
+    var target = 'lightspeedelectronclient://oauth-callback' + window.location.search;
+    document.getElementById('fallback-link').href = target;
+    window.location.replace(target);
+  </script>
+</body>
+</html>
